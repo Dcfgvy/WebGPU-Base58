@@ -5,7 +5,7 @@ Implementation of Base58 encoding algorithm in a WebGPU compute shader
 💻 See the demo <a href="https://dcfgvy.github.io/WebGPU-Base58/">here</a> (your browser should support WebGPU)! The shader code itself is available at <a href="https://github.com/Dcfgvy/WebGPU-Base58/blob/main/src/base58.wgsl">src/base58.wgsl</a>.
 
 ## ⚠ Warning:
-This general algorithm was designed to work with **<ins>arbitrary</ins> small input sizes** (< 1000 bytes) and because of that it is **highly inefficient** due to the reasons detailed in the [Limitations](#limitations) section below. Therefore, **it is strongly recommended to modify the shader the following ways for production**:
+This general algorithm was designed to work with **<ins>arbitrary</ins> small input sizes** (< 1000 bytes) and because of that it is **highly inefficient** due to the reasons detailed in the [Limitations](#⏲-limitations) section below. Therefore, **it is strongly recommended to modify the shader the following ways for production**:
 1. Use a small <ins>fixed</ins> input size appropriate for your use case
 2. Define `b58_bytes` locally instead of using a slow `var<storage>` variable
 3. Use `uniform` buffers instead of `storage` buffers for input
