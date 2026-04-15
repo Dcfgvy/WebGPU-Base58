@@ -2,7 +2,7 @@
 // Copyright (c) 2026 Ivan Kusliy <ipkusliywork@gmail.com>
 // Licensed under the MIT License
 
-// Supports input up to 2968 MB in size (floor((2^32 - 1) / 1.38) bytes) in big-endian byte order.
+// Theoretically supports input up to 747 MB in size (floor((2^32 - 1) / 4 / 1.37) bytes) in big-endian byte order.
 // Output is a combination of b58_bytes & result_info. Read the doc comments of result_info for details.
 
 
@@ -13,12 +13,12 @@
 
 /**
   IN BYTES !!!
-  Max value = floor((2^32 - 1) / 1.38)
+  Max value = floor((2^32 - 1) / 4 / 1.37)
 */
 @group(0) @binding(1) var<storage, read> input_size_arr: array<u32, 1>;
 
 /**
-  Minimum size of ceil(input size * 1.38).
+  Minimum size of ceil(input size * 4 * 1.37) in bytes. Every byte in input gets 4 bytes in b58_bytes.
   Must be initially filled with 0s.
   Must be runtime-sized, since dynamically sized arrays are not allowed in WGSL.
 
@@ -26,7 +26,7 @@
   Access to a fixed-size array variable declared in the function scope (var<function>) is WAY FASTER than access to var<storage>.
   Therefore, it is strongly recommended to modify the shader to use a fixed input size appropriate for your use case.
 */
-@group(0) @binding(2) var<storage, read_write> b58_bytes: array<u32>; // TODO maybe bit-pack 5 elements per u32
+@group(0) @binding(2) var<storage, read_write> b58_bytes: array<u32>; // TODO maybe bit-pack 5 elements per u32 & another group
 
 /**
   {

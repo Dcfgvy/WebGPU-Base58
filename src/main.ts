@@ -87,7 +87,7 @@ class Base58Encoder {
 
     // Create buffers
     const alignedInputSize = Math.max(4, Math.ceil(inputSizeInBytes / 4) * 4);
-    const b58BytesBufferSize = Math.max(4, Math.ceil(Math.ceil(inputSizeInBytes * 4 * 1.38) / 4) * 4);
+    const b58BytesBufferSize = Math.max(4, Math.ceil(Math.ceil(inputSizeInBytes * 4 * 1.37) / 4) * 4);
     
     const inputBuffer = this.device.createBuffer({
       size: alignedInputSize,
