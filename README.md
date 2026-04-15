@@ -18,7 +18,7 @@ This general algorithm was designed to work with **<ins>arbitrary</ins> small in
 
  - The `b58_bytes` buffer is initialized with zeros and should have a size of `ceil(input_size * 4 * 1.37)` bytes (times 4 because each byte in input corresponds to 1 `u32` of size 4 bytes in `b58_bytes`). This sizing accounts for the Base58 encoding expansion: since Base58 has a smaller radix than Base256, approximately 1.37 times more space is needed in a worst case scenario (derived from log(256) / log(58)).
 
- - The result of the computation is composed of the `b58_bytes` array and 2 unsigned 32-bit integers in `result_info`. The `result_info[0]` contains the count of leading zeros ('1' characters in Base58 alphabet), and `result_info[1]` indicates the starting index of encoded digits in `b58_bytes`. The final string is obtained by reading the Base58 character set entries starting from the index specified in `result_info[1]` and prepending the string with `result_info[0]` leading zeros.
+ - The result of the computation is composed of the `b58_bytes` array and 2 unsigned 32-bit integers in `result_info`. The `result_info[0]` contains the count of leading zeros ('1' characters in Base58 alphabet), and `result_info[1]` indicates the starting index of encoded digits in `b58_bytes`. The final string is obtained by translating numbers in `b58_bytes` to the Base58 alphabet starting from the index specified in `result_info[1]` and prepending the string with `result_info[0]` leading '1's.
  
 ## ⏲ Limitations:
 
